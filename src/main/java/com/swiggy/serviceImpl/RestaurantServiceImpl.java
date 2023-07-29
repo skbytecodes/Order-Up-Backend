@@ -6,6 +6,7 @@ import com.swiggy.service.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
@@ -34,6 +35,11 @@ public class RestaurantServiceImpl implements RestaurantService {
         Restaurant restaurant = repo.findById(id).get();
         repo.deleteById(id);
         return restaurant;
+    }
+
+    @Override
+    public List<Restaurant> getAllRestaurants() {
+         return repo.findAllRestaurants();
     }
 
 }

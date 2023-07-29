@@ -13,6 +13,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 @RestController
 @CrossOrigin
 @RequestMapping("/api/v1")
@@ -38,7 +40,7 @@ public class RestaurantController {
         Restaurant restaurant = null;
         try {
             ObjectMapper mapper = new ObjectMapper().registerModule(new JavaTimeModule());
-             restaurant = mapper.readValue(data, Restaurant.class);
+            restaurant = mapper.readValue(data, Restaurant.class);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -54,7 +56,7 @@ public class RestaurantController {
             } else {
                 return new ResponseEntity<>("Something Went Wrong", HttpStatus.INTERNAL_SERVER_ERROR);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>("Something Went Wrong", HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -97,4 +99,15 @@ public class RestaurantController {
         }
     }
 
+
+    @GetMapping("/restaurants")
+    public ResponseEntity<?> getAllRestaurants() {
+        List<Restaurant> restaurants = null;
+        try {
+            restaurants = restaurantService.getAllRestaurants();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(restaurants, HttpStatus.OK);
+    }
 }
