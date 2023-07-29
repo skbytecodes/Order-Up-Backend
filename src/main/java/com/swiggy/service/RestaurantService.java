@@ -10,5 +10,4 @@ public interface RestaurantService {
     public Restaurant saveRestaurant(Restaurant restaurant);
     public Restaurant deleteRestaurantById(Long id);
 
-    public Restaurant updateRestaurantById(Long id, String data);
 }

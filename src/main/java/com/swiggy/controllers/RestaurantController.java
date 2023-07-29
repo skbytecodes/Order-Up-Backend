@@ -13,8 +13,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-@RestController("/apis/v1")
+@RestController
 @CrossOrigin
+@RequestMapping("/api/v1")
 public class RestaurantController {
 
     @Autowired
@@ -24,7 +25,7 @@ public class RestaurantController {
     private Utility util;
 
 
-    @GetMapping("/restaurantById/{id}")
+    @GetMapping("/restaurant/{id}")
     public ResponseEntity<Restaurant> getRestaurantById(@PathVariable("id") Long id) {
         Restaurant restaurantById = restaurantService.getRestaurantById(id);
         return new ResponseEntity<>(restaurantById, HttpStatus.OK);
