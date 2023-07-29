@@ -15,11 +15,12 @@ public class RestaurantServiceImpl implements RestaurantService {
 
     @Override
     public Restaurant getRestaurantById(Long id) {
-        return null;
+        return repo.findById(id).get();
     }
 
     @Override
-    public String saveRestaurant(Restaurant restaurant) {
+    public Restaurant saveRestaurant(Restaurant restaurant) {
+        repo.save(restaurant);
         return null;
     }
 

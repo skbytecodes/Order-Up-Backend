@@ -32,8 +32,8 @@ public class RestaurantController {
 
 
     @PostMapping("/restaurant")
-    public ResponseEntity<String> saveRestaurant(@RequestParam("file") MultipartFile file, @RequestParam("data") String data) {
-        String response = null;
+    public ResponseEntity<?> saveRestaurant(@RequestParam("file") MultipartFile file, @RequestParam("data") String data) {
+        Restaurant response = null;
         Restaurant restaurant = null;
         try {
             ObjectMapper mapper = new ObjectMapper().registerModule(new JavaTimeModule());
@@ -49,7 +49,7 @@ public class RestaurantController {
             restaurant.setImageUrl(imageUrl);
             response = restaurantService.saveRestaurant(restaurant);
             if (response != null) {
-                return new ResponseEntity<>("SuccessFully saved", HttpStatus.OK);
+                return new ResponseEntity<>(response, HttpStatus.OK);
             } else {
                 return new ResponseEntity<>("Something Went Wrong", HttpStatus.INTERNAL_SERVER_ERROR);
             }
@@ -61,9 +61,9 @@ public class RestaurantController {
     }
 
     @PutMapping("/restaurant")
-    public ResponseEntity<String> updateRestaurant(@RequestParam("data") String data) {
+    public ResponseEntity<?> updateRestaurant(@RequestParam("data") String data) {
         Restaurant restaurant = null;
-        String updated = null;
+        Restaurant updated = null;
         try {
             ObjectMapper mapper = new ObjectMapper().registerModule(new JavaTimeModule());
             restaurant = mapper.readValue(data, Restaurant.class);
