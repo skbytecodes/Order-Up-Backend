@@ -1,0 +1,99 @@
+package com.swiggy.controllers;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.swiggy.entities.Restaurant;
+import com.swiggy.service.RestaurantService;
+import com.swiggy.util.Utility;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+@RestController("/apis/v1")
+@CrossOrigin
+public class RestaurantController {
+
+    @Autowired
+    private RestaurantService restaurantService;
+
+    @Autowired
+    private Utility util;
+
+
+    @GetMapping("/restaurantById/{id}")
+    public ResponseEntity<Restaurant> getRestaurantById(@PathVariable("id") Long id) {
+        Restaurant restaurantById = restaurantService.getRestaurantById(id);
+        return new ResponseEntity<>(restaurantById, HttpStatus.OK);
+    }
+
+
+    @PostMapping("/restaurant")
+    public ResponseEntity<String> saveRestaurant(@RequestParam("file") MultipartFile file, @RequestParam("data") String data) {
+        String response = null;
+        Restaurant restaurant = null;
+        try {
+            ObjectMapper mapper = new ObjectMapper().registerModule(new JavaTimeModule());
+             restaurant = mapper.readValue(data, Restaurant.class);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>("Something Went Wrong", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+        try {
+            String imageUrl = util.saveImage(file);
+            restaurant.setImageUrl(imageUrl);
+            response = restaurantService.saveRestaurant(restaurant);
+            if (response != null) {
+                return new ResponseEntity<>("SuccessFully saved", HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>("Something Went Wrong", HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<>("Something Went Wrong", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+    }
+
+    @PutMapping("/restaurant")
+    public ResponseEntity<String> updateRestaurant(@RequestParam("data") String data) {
+        Restaurant restaurant = null;
+        String updated = null;
+        try {
+            ObjectMapper mapper = new ObjectMapper().registerModule(new JavaTimeModule());
+            restaurant = mapper.readValue(data, Restaurant.class);
+            updated = restaurantService.saveRestaurant(restaurant);
+        } catch (JsonMappingException e) {
+            e.printStackTrace();
+            return new ResponseEntity<>("Entry failed-JsonMappingException", HttpStatus.INTERNAL_SERVER_ERROR);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            return new ResponseEntity<>("Entry failed-JsonProcessingException", HttpStatus.INTERNAL_SERVER_ERROR);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>("Something Went Wrong", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return new ResponseEntity<>(updated, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/restaurant/{id}")
+    public ResponseEntity<?> saveSwiggyRestaurant(@PathVariable("id") Long id) {
+        if (id != null) {
+            Restaurant restaurant = null;
+            try {
+                restaurant = restaurantService.deleteRestaurantById(id);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return new ResponseEntity<>(restaurant, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Bad request", HttpStatus.BAD_REQUEST);
+        }
+    }
+
+}
