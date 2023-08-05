@@ -12,4 +12,8 @@ public interface RestaurantRepository extends JpaRepository<Restaurant, Long> {
 
     @Query(value = "select distinct * from restaurant ", nativeQuery = true)
     List<Restaurant> findAllRestaurants();
+
+
+    @Query(value = "select count(1) from restaurant", nativeQuery = true)
+    int findTotalNumberOfRestaurants();
 }

@@ -42,4 +42,13 @@ public class RestaurantServiceImpl implements RestaurantService {
          return repo.findAllRestaurants();
     }
 
+    @Override
+    public int countTotalRestaurants() {
+        try {
+            return repo.findTotalNumberOfRestaurants();
+        }catch (Exception e){
+            return 0;
+        }
+    }
+
 }

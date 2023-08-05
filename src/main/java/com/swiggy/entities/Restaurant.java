@@ -15,8 +15,18 @@ public class Restaurant {
     private String restaurantName;
     private String restaurantAddress;
     private String restaurantType;
-
     private String imageUrl;
+
+    private String imageName;
+
+
+    public String getImageName() {
+        return imageName;
+    }
+
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
+    }
 
     public Long getRestaurantId() {
         return restaurantId;
@@ -66,6 +76,7 @@ public class Restaurant {
                 ", restaurantAddress='" + restaurantAddress + '\'' +
                 ", restaurantType='" + restaurantType + '\'' +
                 ", imageUrl='" + imageUrl + '\'' +
+                ", imageName='" + imageName + '\'' +
                 '}';
     }
 }

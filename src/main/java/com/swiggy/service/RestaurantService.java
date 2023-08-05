@@ -13,4 +13,5 @@ public interface RestaurantService {
     public Restaurant deleteRestaurantById(Long id);
 
     public List<Restaurant> getAllRestaurants();
+    public int countTotalRestaurants();
 }

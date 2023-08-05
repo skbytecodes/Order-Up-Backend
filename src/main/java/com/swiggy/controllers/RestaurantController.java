@@ -49,6 +49,7 @@ public class RestaurantController {
 
         try {
             String imageUrl = util.saveImage(file);
+            restaurant.setImageName(file.getOriginalFilename());
             restaurant.setImageUrl(imageUrl);
             response = restaurantService.saveRestaurant(restaurant);
             if (response != null) {
@@ -105,9 +106,16 @@ public class RestaurantController {
         List<Restaurant> restaurants = null;
         try {
             restaurants = restaurantService.getAllRestaurants();
+            restaurants.forEach(restaurant -> restaurant.getImageUrl().replace("\\","/"));
         } catch (Exception e) {
             e.printStackTrace();
         }
         return new ResponseEntity<>(restaurants, HttpStatus.OK);
+    }
+
+
+    @GetMapping("/totalRestaurants")
+    public int countTotalRestaurants(){
+        return restaurantService.countTotalRestaurants();
     }
 }
