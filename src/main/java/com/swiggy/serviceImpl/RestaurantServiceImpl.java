@@ -51,4 +51,13 @@ public class RestaurantServiceImpl implements RestaurantService {
         }
     }
 
+    @Override
+    public List<Restaurant> getAllTheRestaurantsByChar(String str) {
+        try {
+            return repo.findRestaurantByChar(str);
+        }catch (Exception e){
+            return null;
+        }
+    }
+
 }

@@ -118,4 +118,17 @@ public class RestaurantController {
     public int countTotalRestaurants(){
         return restaurantService.countTotalRestaurants();
     }
+
+
+    @GetMapping("/findRestaurant/{str}")
+    public List<Restaurant> getAllRestaurantsByChar(@PathVariable("str") String str){
+        try {
+            if (str != null || !str.isEmpty()){
+                return restaurantService.getAllTheRestaurantsByChar(str);
+            }else
+                return null;
+        }catch (Exception e){
+            return null;
+        }
+    }
 }
