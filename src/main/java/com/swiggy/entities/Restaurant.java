@@ -1,7 +1,9 @@
+//Note : According to spring docs, always use ManyToOne instead of OneToMany relationship whenever possible.
+//So that's why I have not used OneToMany relationship in this entity as it is very useful
+
 package com.swiggy.entities;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
 @Table(name = "Restaurant")
@@ -16,9 +18,29 @@ public class Restaurant {
     private String restaurantAddress;
     private String restaurantType;
     private String imageUrl;
-
     private String imageName;
 
+
+    private String state;
+
+    private String country;
+
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
 
     public String getImageName() {
         return imageName;

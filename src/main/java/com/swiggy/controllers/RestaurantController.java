@@ -16,7 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/api/v1")
 public class RestaurantController {
 
@@ -42,7 +42,13 @@ public class RestaurantController {
             ObjectMapper mapper = new ObjectMapper().registerModule(new JavaTimeModule());
             restaurant = mapper.readValue(data, Restaurant.class);
 
-        } catch (Exception e) {
+        }catch (JsonMappingException e){
+            e.printStackTrace();
+            return new ResponseEntity<>("JsonMappingException", HttpStatus.INTERNAL_SERVER_ERROR);
+        }catch (JsonProcessingException e){
+            e.printStackTrace();
+            return new ResponseEntity<>("JsonProcessingException", HttpStatus.INTERNAL_SERVER_ERROR);
+        }catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>("Something Went Wrong", HttpStatus.INTERNAL_SERVER_ERROR);
         }
