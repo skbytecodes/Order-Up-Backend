@@ -137,4 +137,15 @@ public class RestaurantController {
             return null;
         }
     }
+
+
+    @GetMapping("/login")
+    public ResponseEntity<Boolean> authenticate(){
+        return new ResponseEntity<>(true, HttpStatus.OK);
+    }
+
+    @GetMapping("/register")
+    public ResponseEntity<Boolean> registration(){
+        return new ResponseEntity<>(true, HttpStatus.OK);
+    }
 }

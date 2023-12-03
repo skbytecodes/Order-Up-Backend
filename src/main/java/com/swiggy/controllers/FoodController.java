@@ -71,10 +71,6 @@ public class FoodController {
         return new ResponseEntity<>(food, HttpStatus.OK);
     }
 
-
-
-
-
     @GetMapping("/foodById/{id}")
     public ResponseEntity<?> getFoodById(@PathVariable("id") Long id){
         try {
@@ -84,8 +80,6 @@ public class FoodController {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
-
 
     @GetMapping("/foods")
     public ResponseEntity<?> findAllFoods(){
