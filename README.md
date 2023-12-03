@@ -35,6 +35,9 @@ To run the application locally, follow these steps:
 
 ### Backend (Spring Boot):
 
-1. Clone the repository:
+Clone the repository:
    ```bash
    git clone https://github.com/your-username/food-delivery-app.git
+
+### Contributions ###
+Contributions are welcome! If you find any issues or have suggestions for improvement, feel free to open an issue or submit a pull request.
