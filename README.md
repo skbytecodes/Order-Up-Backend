@@ -1,8 +1,8 @@
-# Food Delivery Application
+# Order Up
 
 ## Overview
 
-This repository contains the source code for a full-stack food ordering application's backend built with Spring Boot, Spring Security, Spring Data JPA, MySQL in the backend, and React JS in the frontend. The application incorporates Tailwind CSS for styling and utilizes Razorpay as the payment gateway.
+This repository contains the source code for ####Order Up#### that is a food ordering application's backend built with Spring Boot, Spring Security, Spring Data JPA, MySQL in the backend, and React JS in the frontend. The application incorporates Tailwind CSS for styling and utilizes Razorpay as the payment gateway.
 
 ## Technologies Used
 
