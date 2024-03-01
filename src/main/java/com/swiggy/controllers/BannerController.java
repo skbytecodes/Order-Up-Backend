@@ -23,8 +23,6 @@ public class BannerController {
 
     @Autowired
     private BannerService bannerService;
-
-
     @Autowired
     private Utility util;
 

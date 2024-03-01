@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.swiggy.entities.Category;
 import com.swiggy.entities.Food;
+import com.swiggy.entities.Restaurant;
 import com.swiggy.service.CategoryService;
 import com.swiggy.serviceImpl.FoodServiceImpl;
 import com.swiggy.util.Utility;
@@ -115,7 +116,6 @@ public class FoodController {
         }
     }
 
-
     @GetMapping("/restaurants/food/{id}")
     public ResponseEntity<?> foodByRestaurantId(@PathVariable("id") Long restId){
         try {
@@ -125,6 +125,19 @@ public class FoodController {
             e.printStackTrace();
             return new ResponseEntity<>("Something Went Wrong", HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+
+    @GetMapping("/foodsByCost/{type}")
+    public ResponseEntity<List<Food>> getRestaurantsByCost(@PathVariable("type") String type){
+        List<Food> foods;
+        if(type != null){
+            foods = foodService.foodByCost(type);
+        }
+        else {
+            foods = foodService.getAllFoods();
+        }
+        return new ResponseEntity<>(foods, HttpStatus.OK);
     }
 
 }

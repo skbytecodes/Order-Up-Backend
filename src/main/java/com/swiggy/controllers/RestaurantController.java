@@ -139,6 +139,7 @@ public class RestaurantController {
     }
 
 
+
     @GetMapping("/login")
     public ResponseEntity<Boolean> authenticate(){
         return new ResponseEntity<>(true, HttpStatus.OK);

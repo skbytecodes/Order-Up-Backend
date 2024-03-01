@@ -25,4 +25,5 @@ public interface FoodService {
 
     public List<Food> getFourPlusRatingFood();
 
+    List<Food> foodByCost(String type);
 }

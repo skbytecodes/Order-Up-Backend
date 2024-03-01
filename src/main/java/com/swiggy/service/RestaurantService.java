@@ -16,4 +16,5 @@ public interface RestaurantService {
     public int countTotalRestaurants();
 
     public List<Restaurant> getAllTheRestaurantsByChar(String str);
+
 }

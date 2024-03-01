@@ -4,6 +4,8 @@ import com.swiggy.entities.Food;
 import com.swiggy.repo.FoodRepo;
 import com.swiggy.service.FoodService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -87,5 +89,14 @@ public class FoodServiceImpl implements FoodService {
     @Override
     public List<Food> getFourPlusRatingFood() {
         return foodRepo.searchFourPlusRatingFood();
+    }
+
+    @Override
+    public List<Food> foodByCost(String type) {
+        if(type.equals("ASC")){
+           return foodRepo.searchFoodByCostLowToHigh();
+        }else{
+            return foodRepo.findByOrderByFoodPriceDesc();
+        }
     }
 }

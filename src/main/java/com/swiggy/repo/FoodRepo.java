@@ -23,6 +23,7 @@ public interface FoodRepo extends JpaRepository<Food, Long> {
 
     @Query(value = "select * from food order by food_price asc", nativeQuery = true)
     List<Food> searchFoodByCostLowToHigh();
+    List<Food> findByOrderByFoodPriceDesc();
 
 
     @Query(value = "select * from food order by food_rating desc", nativeQuery = true)
